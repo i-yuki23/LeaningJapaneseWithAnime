@@ -37,6 +37,17 @@ class AuthController extends Controller
             ]);
         }
         // Redirect
-        return redirect()->intended();
+        return redirect()->intended('/dashboard');
+    }
+
+    public function logout(Request $request) {
+        Auth::logout();
+
+        // Invalidate the session
+        $request->session()->invalidate();
+        // Regenerate the CSRF token
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 }
