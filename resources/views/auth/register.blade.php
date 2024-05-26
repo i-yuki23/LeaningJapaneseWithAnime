@@ -36,7 +36,7 @@
                 <input type="password" name="password_confirmation" class="input">
             </div>
             {{-- Submit --}}
-            <button class="primary-btn">Register</button>
+            <button class="btn">Register</button>
         </form>
     </div>
 </x-layout>

@@ -33,7 +33,7 @@
             @enderror
 
             {{-- Submit --}}
-            <button class="primary-btn">Login</button>
+            <button class="btn">Login</button>
         </form>
     </div>
 </x-layout>
