@@ -2,10 +2,13 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 // Public routes
-Route::view('/', 'posts/index')->name('home');
+Route::redirect('/', '/posts');
+
+Route::resource('posts', PostController::class);
 
 // Only authenticated users can access these routes
 Route::middleware(('auth'))->group(function() {
