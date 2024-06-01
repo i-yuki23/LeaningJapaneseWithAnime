@@ -10,6 +10,8 @@ Route::redirect('/', '/posts');
 
 Route::resource('posts', PostController::class);
 
+Route::get('/{user}/posts', [DashboardController::class, 'userPosts'])->name('posts.user');
+
 // Only authenticated users can access these routes
 Route::middleware(('auth'))->group(function() {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
