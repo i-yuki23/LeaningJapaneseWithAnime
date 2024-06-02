@@ -10,7 +10,7 @@
         @elseif (session('delete'))
             <x-flashMsg msg="{{ session('delete') }}" bg="bg-red-500"/>
         @endif
-        <form action="{{ route('posts.store') }}" method="post">
+        <form action="{{ route('posts.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             {{-- Post Title --}}
             <div class="mb-4">
@@ -26,6 +26,14 @@
                 <label for="body">Post Content</label>
                 <textarea name="body" rows="5" class="input @error('body') ring-red-500 @enderror">{{ old('body') }}</textarea>
                 @error('body')
+                    <p class="error"> {{ $message }}</p>
+                @enderror
+            </div>
+            {{-- Post Image --}}
+            <div class="mb-4">
+                <label for="image">Cover photo</label>
+                <input type="file" name="image" id="image">
+                @error('image')
                     <p class="error"> {{ $message }}</p>
                 @enderror
             </div>
