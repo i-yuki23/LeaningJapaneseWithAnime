@@ -11,25 +11,25 @@
             <x-flashMsg msg="{{ session('delete') }}" bg="bg-red-500"/>
         @endif
         <form action="{{ route('posts.store') }}" method="post">
-        @csrf
-        {{-- Post Title --}}
-        <div class="mb-4">
-            <label for="title">Post Title</label>
-            <input type="text" name="title" value="{{ old('title') }}" 
-            class="input @error('title') ring-red-500 @enderror">
-            @error('title')
-                <p class="error"> {{ $message }}</p>
-            @enderror
-        </div>
-        {{-- Post Body --}}
-        <div class="mb-4">
-            <label for="body">Post Content</label>
-            <textarea name="body" rows="5" class="input @error('body') ring-red-500 @enderror">{{ old('body') }}</textarea>
-            @error('body')
-                <p class="error"> {{ $message }}</p>
-            @enderror
-        </div>
-        <button class="btn">Create</button>
+            @csrf
+            {{-- Post Title --}}
+            <div class="mb-4">
+                <label for="title">Post Title</label>
+                <input type="text" name="title" value="{{ old('title') }}" 
+                class="input @error('title') ring-red-500 @enderror">
+                @error('title')
+                    <p class="error"> {{ $message }}</p>
+                @enderror
+            </div>
+            {{-- Post Body --}}
+            <div class="mb-4">
+                <label for="body">Post Content</label>
+                <textarea name="body" rows="5" class="input @error('body') ring-red-500 @enderror">{{ old('body') }}</textarea>
+                @error('body')
+                    <p class="error"> {{ $message }}</p>
+                @enderror
+            </div>
+            <button class="btn">Create</button>
         </form>
     </div>
 
@@ -38,7 +38,9 @@
     <div class="grid grid-cols-2 gap-6">
         @foreach ($posts as $post)
             <x-postCard :post="$post">
-
+                {{-- Edit post --}}
+                <a href="{{ route('posts.edit', $post) }}" class="bg-green-500 text-white px-2 py-1 text-xs rounded-md">Edit</a>
+                {{-- Delete post --}}
                 <form action="{{ route('posts.destroy', $post) }}" method="post">
                     @csrf
                     @method('DELETE')
