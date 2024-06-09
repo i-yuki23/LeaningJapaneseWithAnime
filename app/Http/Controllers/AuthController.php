@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
+use PharIo\Manifest\Email;
 
 class AuthController extends Controller
 {
@@ -21,8 +24,26 @@ class AuthController extends Controller
         // Login
         Auth::login($user);
 
+        event(new Registered($user));
+
         // Redirect
-        return redirect()->route('posts.index');
+        return redirect()->route('dashboard');
+    }
+
+    public function verifyNotice() {
+        return view('auth.verify-email');
+    }
+
+    public function VerifyEmail(EmailVerificationRequest $request) {
+        $request->fulfill();
+
+        return redirect()->route('dashboard');
+    }
+
+    public function verifyHandler(Request $request) {
+        $request->user()->sendEmailVerificationNotification();
+
+        return back()->with('message', 'Verification link sent!');
     }
 
     public function login(Request $request) {
