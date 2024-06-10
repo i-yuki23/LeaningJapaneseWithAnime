@@ -1,7 +1,7 @@
 <x-layout>
     <h1 class="title">Register a new acconut</h1>
     <div class="mx-auto max-w-screen-sm card">
-        <form action="/register" method="post">
+        <form action="/register" method="post" x-data="formSubmit" @submit.prevent="submit">
             @csrf
             {{-- Username --}}
             <div class="mb-4">
@@ -35,8 +35,12 @@
                 <label for="password_confirmation">Confirm Password</label>
                 <input type="password" name="password_confirmation" class="input">
             </div>
+            <div class="mb-4 flex items-center">
+                <input type="checkbox" name="subscribe" id="subscribe" class="mr-2">
+                <label for="subscribe">Subscribe to our newsletter</label>
+            </div>
             {{-- Submit --}}
-            <button class="btn">Register</button>
+            <button x-ref="btn" class="btn">Register</button>
         </form>
     </div>
 </x-layout>
