@@ -1,5 +1,10 @@
 <x-layout>
     <h1 class="title"> Welcome Back</h1>
+
+    @if (session('status'))
+        <x-flashMsg msg="{{ session('status') }}" />
+    @endif
+
     <div class="mx-auto max-w-screen-sm card">
         <form action="{{ route('login') }}" method="post">
             @csrf
@@ -23,9 +28,12 @@
             </div>
 
             {{-- Remember Me --}}
-            <div class="mb-4 flex">
-                <input type="checkbox" name="remember" id="remember" class="mr-2">
-                <label for="remember">Remember Me</label>
+            <div class="mb-4 flex justify-between items-center">
+                <div class="flex items-center">
+                    <input type="checkbox" name="remember" id="remember" class="mr-2">
+                    <label for="remember" class="text-sm font-medium text-slate-900">Remember Me</label>
+                </div>
+                <a href="{{ route('password.request') }}" class="text-sm text-blue-500 hover:text-blue-600">Forgot your password?</a>
             </div>
 
             @error('failed')
