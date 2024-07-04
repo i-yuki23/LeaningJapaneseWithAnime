@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\YoutubeController;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Route;
 
@@ -13,6 +14,8 @@ Route::redirect('/', '/posts');
 Route::resource('posts', PostController::class);
 
 Route::get('/{user}/posts', [DashboardController::class, 'userPosts'])->name('posts.user');
+
+Route::get('/youtube/channels/{id}/titles', [YoutubeController::class, 'getListByChannelId'])->name('youtube.channels.titles');
 
 // Only authenticated users can access these routes
 Route::middleware(('auth'))->group(function() {
