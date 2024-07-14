@@ -40,11 +40,11 @@ class VideoSearchService
         $searchResponse = $this->youtube->search->listSearch('id,snippet', [
             'q' => $query,
             'type' => 'video',
-            'videoCaption' => 'closedCaption',
+            // 'videoCaption' => 'closedCaption',
             'relevanceLanguage' => $language,
             'maxResults' => $maxResults,
             'videoEmbeddable' => true,
-            'videoLicense' => 'creativeCommon',
+            // 'videoLicense' => 'creativeCommon',
         ]);
 
         return $searchResponse['items'];
