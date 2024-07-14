@@ -1,13 +1,8 @@
 <x-layout>
-    <div class="content">
-        <div class="content__body">
-            @foreach ($snippets as $snippet)
-                <div class="content__body__videos">
-                    <p>
-                        {{ $snippet->title }}
-                    </p>
-                </div>
-            @endforeach
-        </div>
-    </div>
+    <h1>Search Videos</h1>
+    <form action="{{ route('youtube.search.post') }}" method="POST">
+        @csrf
+        <input type="text" name="keyword" placeholder="Enter keyword">
+        <button type="submit">Search</button>
+    </form>
 </x-layout>
